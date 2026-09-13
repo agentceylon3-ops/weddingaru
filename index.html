@@ -1,0 +1,1361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Icons සඳහා FontAwesome Link එක -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wedding Invitation</title>
+    <!-- අකුරු හැඩ කිරීම සඳහා Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            background-color: #f0f0f0;
+           
+            font-family: 'Times New Roman', Times, serif;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start; /* PC එකේදී සිරස්ව උඩ සිට සූදානම් වීමට */
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px 10px; /* පිටුවේ උඩින් සහ යටින් ඉඩ තබා ගැනීමට */
+            box-sizing: border-box;
+        }
+
+        .invitation-card {
+            width: 100%; /* Mobile වලදී සම්පූර්ණ පළල ලබා ගනී */
+            max-width: 400px; /* PC වලදී උපරිම පළල 400px වේ */
+            min-height: 100vh; /* Mobile වලදී තිරයේ සම්පූර්ණ උස ලබා ගනී */
+            background-color: #f9f1e2;
+            background: linear-gradient(rgba(249, 241, 226, 0.8), rgba(249, 241, 226, 0.8)), url('bg.png');
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            box-sizing: border-box;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        /* උඩ පින්තූරය */
+        .top-img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: auto;
+            z-index: 1;
+        }
+
+        /* පහළ පින්තූරය */
+        .bottom-img {
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: auto;
+            z-index: 1;
+            border-radius: 0 0 30px 30px;
+        }
+
+        /* අකුරු සැකැස්ම */
+        .text-container {
+            text-align: center;
+            color: #3f4125;
+            position: relative;
+            z-index: 10;
+            width: 90%;
+            margin-top: 10px;
+            padding: 20px 0;
+        }
+
+        .celebrate {
+            font-size: 13px;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .names {
+            /*font-family: 'Great Vibes', cursive;*/
+            font-size: 52px;
+            font-weight: normal;
+            margin: 0;
+            color: #3f4125;
+            line-height: 1.1;
+        }
+
+        .symbols {
+            font-family: 'Times New Roman', serif;
+            font-size: 26px;
+            margin: 0 10px;
+            vertical-align: middle;
+        }
+
+        .awaited {
+            font-size: 13px;
+            letter-spacing: 1px;
+            margin-top: 25px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .date-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            margin-bottom: 10px;
+        }
+
+        .date {
+            font-size: 20px;
+            font-weight: bold;
+            color: white;
+            background-color: #3f4125;
+            padding: 7px 25px;
+            border-radius: 5px;
+            letter-spacing: 1px;
+            margin: 0;
+        }
+
+        .details {
+            font-size: 15px;
+            margin-top: 15px;
+            margin-bottom: 5px;
+        }
+
+        .location {
+            font-size: 17px;
+            font-weight: bold;
+            margin-top: 0;
+            margin-bottom: 0;
+        }
+
+        .address {
+            font-size: 13px;
+            font-style: italic;
+            margin-top: 0;
+            margin-bottom: 20px;
+        }
+
+        /* --- Mobile Responsive කොටස (Media Queries) --- */
+        
+        /* පරිගණක සහ ටැබ්ලට් සඳහා (තිරය 450px ට වඩා විශාල නම්) */
+        @media (min-width: 450px) {
+            .invitation-card {
+                min-height: auto;
+                height: auto; /* PC වලදී උස ලිමිට් නොවී සියලුම කොටස් පෙනෙන ලෙස සකස් කිරීම */
+                border: 2px solid #ccc; /* PC වලදී පමණක් border එකක් පෙන්වයි */
+                border-radius: 15px;
+                margin: 20px 0;
+            }
+        }
+
+        /* ඉතා කුඩා ජංගම දුරකථන තිර සඳහා අකුරු ප්‍රමාණය කුඩා කිරීම */
+        @media (max-width: 380px) {
+            .names { font-size: 42px; }
+            .symbols { font-size: 20px; }
+            .celebrate, .awaited { font-size: 11px; letter-spacing: 1px; }
+            .date { font-size: 16px; padding: 5px 20px; }
+            .details { font-size: 14px; }
+            .location { font-size: 15px; }
+            .address { font-size: 12px; }
+        }
+
+
+        /*count*/
+        /* කැපෙන වචන වල පෙනුම ලස්සන කරන්න (අවශ්‍ය නම් පමණක් යොදන්න) */
+#greetingMsg s {
+    text-decoration: line-through;
+    color: #888888; /* අළු පාටක් යෙදීම */
+    opacity: 0.7;
+}
+
+
+
+    /*date venu box*/
+    /* Details Box එකේ ප්‍රධාන සැකැස්ම */
+.wedding-details-box {
+    width: 90%;
+    max-width: 360px;
+    background-color: #f9f1e2;
+    border-radius: 15px;
+    padding: 25px 20px;
+    box-shadow: 0 10px 30px rgba(63, 65, 37, 0.15);
+    border: 1px solid rgba(63, 65, 37, 0.2);
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    margin: 20px auto 30px auto; /* උඩින් සහ යටින් පරතරයක් තබා මැදට ගැනීමට */
+    position: relative;
+    z-index: 10; /* පින්තූර වලට උඩින් පෙන්වීමට */
+}
+
+/* එක් එක් තොරතුරු පේළිය */
+.detail-item {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px dashed rgba(63, 65, 37, 0.3);
+}
+
+.detail-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+/* Icons වල සැකැස්ම */
+.icon-wrapper {
+    background-color: rgba(63, 65, 37, 0.1);
+    color: #3f4125;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    flex-shrink: 0;
+}
+
+/* තොරතුරු වල අකුරු සැකැස්ම */
+.info-content {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    text-align: left; /* අකුරු වමට බරව පෙන්වීමට */
+}
+
+.label {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #617757;
+    font-weight: bold;
+    font-family: Arial, sans-serif;
+}
+
+.value {
+    font-size: 17px;
+    color: #3f4125;
+    font-weight: bold;
+    margin: 0;
+    line-height: 1.3;
+}
+
+.sub-value {
+    font-size: 14px;
+    color: #555;
+    font-style: italic;
+    margin: 0;
+}
+
+/* Mobile ෆෝන් වලට අකුරු පොඩ්ඩක් ගළපන්න */
+@media (max-width: 380px) {
+    .wedding-details-box {
+        padding: 20px 15px;
+    }
+    .icon-wrapper {
+        width: 45px;
+        height: 45px;
+        font-size: 18px;
+    }
+    .value { font-size: 15px; }
+    .sub-value { font-size: 13px; }
+}
+
+
+
+/*drees code*/
+/* --- Dress Code Box සැකැස්ම --- */
+.dress-code-box {
+    width: 90%;
+    max-width: 360px;
+    background-color: #f9f1e2;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 10px 30px rgba(63, 65, 37, 0.15);
+    border: 1px solid rgba(63, 65, 37, 0.2);
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    margin: 0 auto 30px auto; /* මැදට ගෙන යටින් ඉඩක් තැබීමට */
+    position: relative;
+    z-index: 10;
+    text-align: center;
+}
+
+.dress-code-title {
+    font-size: 16px;
+    color: #3f4125;
+    font-weight: bold;
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.dress-code-title i {
+    color: #617757;
+    font-size: 20px;
+}
+
+.dress-code-desc {
+    font-size: 14px;
+    color: #555;
+    margin: 0;
+    line-height: 1.4;
+}
+
+/* ඔයා දාන පින්තූරය ලස්සනට පෙන්වන්න */
+.dress-code-img {
+    width: 100%;
+    max-width: 280px; /* පින්තූරය ගොඩක් ලොකු වෙන එක වළක්වයි */
+    height: auto;
+    border-radius: 10px;
+    border: 2px dashed rgba(97, 119, 87, 0.5); /* වටේට ලස්සන තිත් ඉරක් */
+    padding: 5px;
+    box-sizing: border-box;
+}
+
+
+/*wedding event*/
+/* Reset margins to prevent empty space on sides */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.wedding-events {
+  width: 100%;
+  padding: 80px 20px;
+  background-color: #fdfbf7; /* Light warm background */
+  font-family: 'Poppins', sans-serif; /* Change to your website's font */
+}
+
+.events-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.section-title {
+  text-align: center;
+  font-size: 2.5rem;
+  color: #2c3e50;
+  margin-bottom: 10px;
+}
+
+.section-subtitle {
+  text-align: center;
+  font-size: 1.1rem;
+  color: #7f8c8d;
+  margin-bottom: 50px;
+}
+
+.events-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 30px;
+}
+
+.event-card {
+  background: #ffffff;
+  padding: 40px 30px;
+  border-radius: 15px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-bottom: 4px solid transparent;
+}
+
+.event-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+  border-bottom: 4px solid #d4af37; /* Gold accent color */
+}
+
+.event-icon {
+  width: 70px;
+  height: 70px;
+  margin: 0 auto 20px;
+  background-color: #f8f1e5;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  color: #d4af37;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.event-card:hover .event-icon {
+  background-color: #d4af37;
+  color: #ffffff;
+}
+
+.event-title {
+  font-size: 1.5rem;
+  color: #2c3e50;
+  margin-bottom: 20px;
+}
+
+.event-details {
+  list-style: none;
+  margin-bottom: 20px;
+}
+
+.event-details li {
+  font-size: 0.95rem;
+  color: #555;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.event-details li i {
+  color: #d4af37;
+}
+
+.event-desc {
+  font-size: 0.95rem;
+  color: #777;
+  line-height: 1.6;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .wedding-events {
+    padding: 60px 15px;
+  }
+  .section-title {
+    font-size: 2rem;
+  }
+}
+
+
+/*map*/
+/* --- Location Section (Map) --- */
+        .location-section {
+            width: 90%;
+            max-width: 360px;
+            background-color: #f9f1e2;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(63, 65, 37, 0.15);
+            border: 1px solid rgba(63, 65, 37, 0.2);
+            margin: 0 auto 30px auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .location-title {
+            font-size: 16px;
+            color: #3f4125;
+            font-weight: bold;
+            margin: 0 0 15px 0;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .location-title i {
+            color: #617757;
+            font-size: 20px;
+        }
+
+        .map-container {
+            width: 100%;
+            border-radius: 10px;
+            overflow: hidden;
+            border: 2px dashed rgba(97, 119, 87, 0.5);
+            padding: 4px;
+            background-color: #fff;
+        }
+
+        /* Make iframe responsive */
+        .map-container iframe {
+            width: 100%;
+            height: 250px;
+            border: none;
+            border-radius: 6px;
+            display: block; /* Removes bottom space */
+        }
+
+        .map-actions {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+            width: 100%;
+            justify-content: center;
+        }
+        
+        .map-btn {
+            background-color: #617757;
+            color: white;
+            text-decoration: none;
+            padding: 10px 15px;
+            border-radius: 25px;
+            font-size: 13px;
+            font-family: Arial, sans-serif;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: background-color 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .map-btn:hover {
+            background-color: #3f4125;
+        }
+
+
+        /*rsvp*/
+        /* --- RSVP Section --- */
+        .rsvp-section {
+            width: 90%;
+            max-width: 360px;
+            background-color: #f9f1e2;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(63, 65, 37, 0.15);
+            border: 1px solid rgba(63, 65, 37, 0.2);
+            margin: 0 auto 30px auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            box-sizing: border-box;
+        }
+
+        .rsvp-title {
+            font-size: 16px;
+            color: #3f4125;
+            font-weight: bold;
+            margin: 0 0 15px 0;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .rsvp-title i {
+            color: #617757;
+            font-size: 20px;
+        }
+
+        .rsvp-form {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+            gap: 5px;
+        }
+
+        .form-group label {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #617757;
+            font-weight: bold;
+            font-family: Arial, sans-serif;
+        }
+
+        .form-group input, 
+        .form-group select, 
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid rgba(97, 119, 87, 0.5);
+            border-radius: 8px;
+            background-color: #fff;
+            color: #3f4125;
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 15px;
+            box-sizing: border-box;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            height: 70px;
+        }
+
+        .rsvp-btn {
+            background-color: #617757;
+            color: white;
+            text-decoration: none;
+            padding: 12px 15px;
+            border-radius: 25px;
+            font-size: 14px;
+            font-family: Arial, sans-serif;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: background-color 0.3s;
+            border: none;
+            cursor: pointer;
+            margin-top: 10px;
+            width: 100%;
+        }
+
+        .rsvp-btn:hover {
+            background-color: #3f4125;
+        }
+        
+        #rsvp-status {
+            font-size: 13px;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+
+        /* --- Footer Section --- */
+        .wedding-footer {
+            width: 100%;
+            background-color: #0d0d0d;
+            color: #d4af37; /* Gold color */
+            padding: 35px 20px 20px 20px;
+            margin-top: 30px;
+            box-sizing: border-box;
+            text-align: center;
+            font-family: 'Times New Roman', Times, serif;
+            border-top: 2px solid #d4af37;
+        }
+
+        .footer-content {
+            max-width: 400px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+            align-items: center;
+        }
+
+        .footer-couple-name {
+            font-size: 32px;
+            margin: 0;
+            color: #f3e5ab; /* Soft gold for names */
+            letter-spacing: 1px;
+            font-weight: normal;
+        }
+
+        .footer-details {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            font-size: 14px;
+            color: #e0d0a0;
+        }
+
+        .footer-details p {
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .footer-details i {
+            color: #d4af37;
+            font-size: 15px;
+        }
+
+        .footer-contact a {
+            color: #e0d0a0;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-contact a:hover {
+            color: #ffffff;
+        }
+
+        .footer-divider {
+            width: 80%;
+            height: 1px;
+            background: linear-gradient(to right, transparent, rgba(212, 175, 55, 0.5), transparent);
+            margin: 10px 0;
+        }
+
+        .footer-credit {
+            font-size: 12px;
+            color: #a09070;
+            font-family: Arial, sans-serif;
+            letter-spacing: 0.5px;
+        }
+
+        .footer-credit a {
+            color: #d4af37;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .footer-credit a:hover {
+            text-decoration: underline;
+        }
+
+
+
+        /*kola helena */
+      /* --- Falling Leaves Animation (Fixed) --- */
+        #leaves-area {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%; /* Backup එකක් විදිහට */
+            overflow: hidden; 
+            pointer-events: none; 
+            z-index: 5;
+        }
+
+        .falling-leaf {
+            position: absolute;
+            color: #617757; 
+            top: -50px; /* අනිවාර්යයෙන්ම තිරයෙන් උඩින් පටන් ගන්න */
+            opacity: 0; /* වැටෙන්න පටන් ගන්න කලින් නොපෙනී තියෙන්න */
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            0% {
+                top: -50px;
+                transform: rotate(0deg) translateX(0);
+                opacity: 0;
+            }
+            15% {
+                opacity: 0.12; /* මෙතනින් තමයි පේන්න ගන්නේ */
+            }
+            85% {
+                opacity: 0.12;
+            }
+            100% {
+                top: 100%; /* Stopper එක ළඟට එනකම් වැටෙනවා */
+                transform: rotate(360deg) translateX(30px);
+                opacity: 0; 
+            }
+        }
+
+
+        /* --- Loading & Intro Screens --- */
+        body.locked {
+            overflow: hidden; /* ලෝඩ් වෙද්දි යටට යන්න බැරි වෙන්න */
+        }
+
+        #loader-wrapper, #intro-wrapper {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: #f9f1e2;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.8s ease;
+        }
+
+        /* Intro Screen එක මුලින්ම පිටිපස්සේ හැංගිලා තියෙන්නේ */
+        #intro-wrapper {
+            z-index: 9998;
+            background-color: #000; /* Video එකට කළු පසුබිමක් */
+        }
+
+        /* Video සැකැස්ම */
+        #intro-video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* ෆෝන් එකේ සම්පූර්ණ තිරයටම වීඩියෝ එක හැඩගැස්වීම */
+        }
+
+        #click-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: #d4af37;
+            cursor: pointer;
+            z-index: 10;
+        }
+
+        .play-btn {
+            width: 60px;
+            height: 60px;
+            background-color: rgba(212, 175, 55, 0.8);
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            margin-bottom: 15px;
+            animation: pulse 1.5s infinite;
+        }
+
+        #click-overlay p {
+            font-family: Arial, sans-serif;
+            font-size: 18px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        /* --- Heart Loading Animation --- */
+        .heart-loader {
+            position: relative;
+            width: 40px;
+            height: 40px;
+            background-color: #d9534f;
+            transform: rotate(-45deg);
+            animation: heartbeat 1.2s infinite;
+            margin-bottom: 40px;
+        }
+
+        .heart-loader::before, .heart-loader::after {
+            content: "";
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            background-color: #d9534f;
+            border-radius: 50%;
+        }
+
+        .heart-loader::before {
+            top: -20px;
+            left: 0;
+        }
+
+        .heart-loader::after {
+            top: 0;
+            left: 20px;
+        }
+
+        .loading-percentage {
+            font-size: 24px;
+            font-weight: bold;
+            color: #3f4125;
+            margin-top: 10px;
+            font-family: Arial, sans-serif;
+        }
+
+        .loading-msg {
+            font-size: 12px;
+            color: #617757;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-top: 5px;
+        }
+
+        /* Animations */
+        @keyframes heartbeat {
+            0% { transform: rotate(-45deg) scale(1); }
+            25% { transform: rotate(-45deg) scale(1.1); }
+            50% { transform: rotate(-45deg) scale(1); }
+            75% { transform: rotate(-45deg) scale(1.2); }
+            100% { transform: rotate(-45deg) scale(1); }
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(212, 175, 55, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ======= 1. Loading Screen ======= -->
+    <div id="loader-wrapper">
+        <div class="heart-loader"></div>
+        <div id="loading-text" class="loading-percentage">0%</div>
+        <div class="loading-msg">Loading Memories...</div>
+    </div>
+
+    <!-- ======= 2. Intro Video Screen ======= -->
+    <div id="intro-wrapper">
+        <!-- "your_animation.mp4" වෙනුවට ඔයාගේ වීඩියෝ එකේ නම දාන්න -->
+        <video id="intro-video" playsinline preload="auto">
+            <source src="anivideo.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        
+        <!-- Click කරන්න කියන පණිවිඩය -->
+        <div id="click-overlay">
+            <div class="play-btn">
+                <i class="fa-solid fa-play"></i>
+            </div>
+            <p>Tap to Open</p>
+        </div>
+    </div>
+
+
+
+
+    <div class="invitation-card">
+        <!-- 1. මේක <body> tag එකට පහළින්ම දාන්න (කොළ ටික වැටෙන ඒරියා එක) -->
+
+        
+        <!-- ======= උඩ පින්තූරය දාන තැන ======= -->
+        <img src="top_image.png" alt="Top Design" class="top-img">
+        <div id="leaves-area"></div>
+        
+        <div class="text-container">
+            <p class="celebrate" style="margin-top: 80px;">CELEBRATE WITH US AS WE TIE THE KNOT</p>
+            <h1 class="names">Kyaraine <span class="symbols">&</span> Orhan</h1> <br>
+            <p class="details">අතිනත ගැනීමේ ප්‍රීතිය නිමිත්තෙන් පැවැත්වෙන ප්‍රිය සම්භාෂණයට සහභාගී වන මෙන්  </p>
+            <!-- අමුත්තාගේ නම පෙන්වන ස්ථානය -->
+            <p class="location" id="guestName" style="font-size: 25px;"></p>
+            <!-- "ඔබට/ඔබ දෙපළට/ඔබ සැමට" වාක්‍යය පෙන්වන ස්ථානය -->
+            <p class="location" id="greetingMsg" style="font-size: 20px;"></p>
+
+           
+
+
+            <p class="awaited">YOUR COMPANY IS AWAITED AT OUR MARRIAGE</p>
+            
+            <div class="date-container">
+                <p class="date">20 | AUGUST | 2027</p>
+            </div>
+            
+            
+        </div>
+
+        <!-- ======= පහළ පින්තූරය දාන තැන ======= -->
+        <img src="bottom_image.png" alt="Bottom Design" class="bottom-img">
+
+        <div class="wedding-details-box">
+
+
+    <div id="leaf-stopper"></div>
+
+
+    <!-- Date කොටස -->
+    <div class="detail-item">
+        <div class="icon-wrapper">
+            <i class="fa-regular fa-calendar-check"></i>
+        </div>
+        <div class="info-content">
+            <span class="label">When</span>
+            <p class="value">20 August 2027</p>
+            <p class="sub-value">Tuesday</p>
+        </div>
+    </div>
+
+    <!-- Time කොටස -->
+    <div class="detail-item">
+        <div class="icon-wrapper">
+            <i class="fa-regular fa-clock"></i>
+        </div>
+        <div class="info-content">
+            <span class="label">Time</span>
+            <p class="value">09:00 AM</p>
+            <p class="sub-value">Onwards</p>
+        </div>
+    </div>
+
+    <!-- Venue කොටස -->
+    <div class="detail-item">
+        <div class="icon-wrapper">
+            <i class="fa-solid fa-location-dot"></i>
+        </div>
+        <div class="info-content">
+            <span class="label">Where</span>
+            <p class="value">Loui Garden</p>
+            <p class="sub-value">123 Anywhere, Any City</p>
+        </div>
+    </div>
+
+</div>
+
+
+<!--drees code-->
+    <!-- ======= Dress Code කොටස ======= -->
+        <div class="dress-code-box">
+            <h2 class="dress-code-title">
+                <i class="fa-solid fa-shirt"></i> Dress Code
+            </h2>
+            <p class="dress-code-desc">කරුණාකර පහත දැක්වෙන පාට වලට (Green Theme) ගැළපෙන අලංකාර ඇඳුමින් සැරසී එන්න.</p>
+            
+            <!-- "dress_code_image.jpg" මකා දමා ඔබ සතු පින්තූරයේ නම මෙතැනට දෙන්න -->
+            <img src="color.png" alt="Green Dress Code" class="dress-code-img">
+        </div>
+
+
+
+    <!-- FontAwesome CDN for Icons (Add this inside your <head> tag if not already there) -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<section class="wedding-events" id="events">
+  <div class="events-container">
+    <h2 class="section-title">Wedding Events</h2>
+    <p class="section-subtitle">Celebrate our special day with us</p>
+    
+    <div class="events-grid">
+      
+      <!-- Event 1: Ceremony -->
+      <div class="event-card">
+        <div class="event-icon">
+          <i class="fa-solid fa-ring"></i>
+        </div>
+        <h3 class="event-title">Poruwa Ceremony</h3>
+        <ul class="event-details">
+          <li><i class="fa-regular fa-clock"></i> 09:00 AM - 10:30 AM</li>
+          <li><i class="fa-solid fa-location-dot"></i> The Grand Ballroom, Colombo</li>
+        </ul>
+        <p class="event-desc">The traditional ceremony where we exchange our vows and rings.</p>
+      </div>
+
+      <!-- Event 2: Reception -->
+      <div class="event-card">
+        <div class="event-icon">
+          <i class="fa-solid fa-champagne-glasses"></i>
+        </div>
+        <h3 class="event-title">Wedding Reception</h3>
+        <ul class="event-details">
+          <li><i class="fa-regular fa-clock"></i> 12:30 PM - 03:30 PM</li>
+          <li><i class="fa-solid fa-location-dot"></i> Main Banquet Hall</li>
+        </ul>
+        <p class="event-desc">Join us for lunch, speeches, and making wonderful memories.</p>
+      </div>
+
+      <!-- Event 3: After Party -->
+      <div class="event-card">
+        <div class="event-icon">
+          <i class="fa-solid fa-music"></i>
+        </div>
+        <h3 class="event-title">After Party</h3>
+        <ul class="event-details">
+          <li><i class="fa-regular fa-clock"></i> 04:00 PM Onwards</li>
+          <li><i class="fa-solid fa-location-dot"></i> Poolside Terrace</li>
+        </ul>
+        <p class="event-desc">Let's hit the dance floor and celebrate the night away!</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ======= Location Map කොටස ======= -->
+        <div class="location-section">
+            <h2 class="location-title">
+                <i class="fa-solid fa-map-location-dot"></i> Get Directions
+            </h2>
+            
+            <div class="map-container">
+                <!-- මෙතැනට Google Map Embed කේතය (iframe) දාන්න -->
+                <!-- උදාහරණයක් ලෙස කොළඹ නගරයේ සිතියමක් යොදා ඇත. -->
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d126743.58585973711!2d79.77380290547636!3d6.921922576112999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ae253d10f7a7003%3A0x320b2e4d32d3838d!2sColombo!5e0!3m2!1sen!2slk!4v1716309851608!5m2!1sen!2slk" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+
+            <div class="map-actions">
+                 <!-- මෙතැනට Google Map Link එක දාන්න -->
+                <a href="https://maps.app.goo.gl/YourMapLinkHere" target="_blank" class="map-btn">
+                    <i class="fa-brands fa-google"></i> Open in Maps
+                </a>
+            </div>
+        </div>
+        <!-- ======= Location Map කොටස අවසන් ======= -->
+
+
+        <!-- ======= RSVP Form කොටස ======= -->
+        <div class="rsvp-section">
+            <h2 class="rsvp-title">
+                <i class="fa-regular fa-envelope-open"></i> RSVP / Response
+            </h2>
+            <form id="rsvpForm" class="rsvp-form">
+                <div class="form-group">
+                    <label for="name">Your Name</label>
+                    <input type="text" id="name" name="from_name" required placeholder="Enter your name">
+                </div>
+
+                <div class="form-group">
+                    <label for="attendance">Will you attend?</label>
+                    <select id="attendance" name="attendance" required>
+                        <option value="" disabled selected>Select an option</option>
+                        <option value="Joyfully Accepts">Joyfully Accepts (පැමිණේ)</option>
+                        <option value="Regretfully Declines">Regretfully Declines (පැමිණීමට නොහැක)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="guests">Number of Guests</label>
+                    <input type="number" id="guests" name="guests_count" min="1" max="5" value="1" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="message">Wishes / Message</label>
+                    <textarea id="message" name="message" placeholder="Write a short wish for us..."></textarea>
+                </div>
+
+                <button type="submit" class="rsvp-btn" id="submitBtn">
+                    <i class="fa-solid fa-paper-plane"></i> Send RSVP
+                </button>
+            </form>
+            <p id="rsvp-status"></p>
+        </div>
+        <!-- ======= RSVP Form කොටස අවසන් ======= -->
+
+
+        <!-- ======= Footer කොටස ======= -->
+        <footer class="wedding-footer">
+            <div class="footer-content">
+                
+                <!-- Couple Name -->
+                <h2 class="footer-couple-name">Kyaraine & Orhan</h2>
+                
+                <!-- Date, Venue & Contact Info -->
+                <div class="footer-details">
+                    <p><i class="fa-solid fa-calendar-days"></i> 20 August 2027</p>
+                    <p><i class="fa-solid fa-location-dot"></i> Loui Garden, 123 Anywhere, Any City</p>
+                    <p class="footer-contact">
+                        <i class="fa-solid fa-phone"></i> 
+                        <a href="tel:+94770000000">+94 77 000 0000</a>
+                    </p>
+                </div>
+
+                <!-- Divider Line -->
+                <div class="footer-divider"></div>
+
+                <!-- Developer Credit -->
+                <div class="footer-credit">
+                    Created by <strong>Home Artist</strong> | <a href="tel:0781227941">0781227941</a>
+                </div>
+
+            </div>
+        </footer>
+        <!-- ======= Footer කොටස අවසන් ======= -->
+
+
+
+
+    </div>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script>
+        //name & count
+        // URL එකේ තියෙන parameters ලබා ගැනීම
+const urlParams = new URLSearchParams(window.location.search);
+
+// 1. නම ලබාගෙන HTML එකට ඇතුලත් කිරීම
+const guestName = urlParams.get('name');
+if (guestName) {
+    // නමක් ලින්ක් එකේ තිබ්බොත් ඒක p tag එකට දානවා
+    document.getElementById('guestName').innerText = guestName;
+}
+
+// 2. ආරාධනා වාක්‍යය (type එක අනුව) සකස් කිරීම
+const inviteType = urlParams.get('type');
+const greetingElement = document.getElementById('greetingMsg');
+
+let greetingHTML = "";
+
+// type එක අනුව අදාල නැති වචන <s> tag එකෙන් කපලා පෙන්වීම
+switch (inviteType) {
+    case '1':
+        // එක් අයෙකුට පමණක් නම් (type=1)
+        greetingHTML = "ඔබට / <s>ඔබ දෙපළට</s> / <s>ඔබ සැමට</s> කෙරෙන සුහද ඇරයුමයි මේ!";
+        break;
+    case '2':
+        // දෙපළකට නම් (type=2)
+        greetingHTML = "<s>ඔබට</s> / ඔබ දෙපළට / <s>ඔබ සැමට</s> කෙරෙන සුහද ඇරයුමයි මේ!";
+        break;
+    case '3':
+        // පවුලේ සැමට නම් (type=3)
+        greetingHTML = "<s>ඔබට</s> / <s>ඔබ දෙපළට</s> / ඔබ සැමට කෙරෙන සුහද ඇරයුමයි මේ!";
+        break;
+    default:
+        // ලින්ක් එකේ type එකක් දීලා නැත්නම් සාමාන්‍ය විදිහට පෙන්වීම
+        greetingHTML = "ඔබට / ඔබ දෙපළට / ඔබ සැමට කෙරෙන සුහද ඇරයුමයි මේ!";
+}
+
+// හදාගත්තු වාක්‍යය HTML එකට ඇතුලත් කිරීම
+greetingElement.innerHTML = greetingHTML;
+
+
+//rsvp
+
+   (function(){
+      emailjs.init("YOUR_PUBLIC_KEY"); // මෙතැනට ඔයාගේ EmailJS Public Key එක දාන්න
+   })();
+
+   document.getElementById('rsvpForm').addEventListener('submit', function(event) {
+       event.preventDefault();
+       
+       const submitBtn = document.getElementById('submitBtn');
+       const statusText = document.getElementById('rsvp-status');
+       
+       submitBtn.innerText = "Sending...";
+       submitBtn.disabled = true;
+
+       // මෙතැනට ඔයාගේ EmailJS Service ID සහ Template ID දාන්න
+       const serviceID = "YOUR_SERVICE_ID";
+       const templateID = "YOUR_TEMPLATE_ID";
+
+       emailjs.sendForm(serviceID, templateID, this)
+           .then(() => {
+               statusText.style.color = "#617757";
+               statusText.innerText = "Thank you! Your RSVP has been sent successfully.";
+               submitBtn.innerText = "Sent Successfully ✓";
+               document.getElementById('rsvpForm').reset();
+           }, (error) => {
+               statusText.style.color = "#d9534f";
+               statusText.innerText = "Failed to send. Please try again later.";
+               submitBtn.innerText = "Send RSVP";
+               submitBtn.disabled = false;
+               console.log('FAILED...', error);
+           });
+   });
+
+
+
+   // --- Falling Leaves Function ---
+// --- Falling Leaves Function (Fixed) ---
+window.addEventListener("load", function() { 
+    const leavesArea = document.getElementById('leaves-area');
+    const stopper = document.getElementById('leaf-stopper');
+
+    if (leavesArea && stopper) {
+        // Stopper එක තියෙන තැනට Area එකේ උස හරියටම මනින Function එක
+        function adjustLeavesArea() {
+            let endPoint = stopper.offsetTop;
+            if (endPoint > 0) {
+                leavesArea.style.height = endPoint + 'px';
+            }
+        }
+        
+        // පින්තූර ලෝඩ් වුණ ගමන් උස හදනවා
+        adjustLeavesArea();
+        
+        // ෆෝන් එක හරවද්දිත් ආයේ උස හදනවා
+        window.addEventListener('resize', adjustLeavesArea);
+        
+        // ආරක්ෂාවට තත්පර 1කින් පස්සෙත් ආයෙත් උස Check කරනවා
+        setTimeout(adjustLeavesArea, 1000);
+
+        const numberOfLeaves = 15; // කොළ ගාණ
+
+        for (let i = 0; i < numberOfLeaves; i++) {
+            let leaf = document.createElement('i');
+            leaf.className = 'fa-solid fa-leaf falling-leaf'; 
+            
+            let size = 15 + Math.random() * 15; 
+            let leftPosition = Math.random() * 100; 
+            let animationDuration = 6 + Math.random() * 8; 
+            let animationDelay = Math.random() * 5; 
+
+            leaf.style.fontSize = size + 'px';
+            leaf.style.left = leftPosition + '%';
+            leaf.style.animationDuration = animationDuration + 's';
+            leaf.style.animationDelay = animationDelay + 's';
+            
+            leavesArea.appendChild(leaf);
+        }
+    }
+});
+
+
+
+//loading & video funtion 
+// --- Loading & Video Intro Logic ---
+document.addEventListener("DOMContentLoaded", function() {
+    // Scroll කිරීම නැවැත්වීමට body එක lock කිරීම
+    document.body.classList.add("locked");
+
+    let progress = 0;
+    let pageLoaded = false;
+    const progressText = document.getElementById("loading-text");
+    const loaderWrapper = document.getElementById("loader-wrapper");
+    const introWrapper = document.getElementById("intro-wrapper");
+    const clickOverlay = document.getElementById("click-overlay");
+    const introVideo = document.getElementById("intro-video");
+
+    // Page එක සම්පූර්ණයෙන්ම ලෝඩ් වුණාම pageLoaded = true වෙනවා
+    window.addEventListener("load", function() {
+        pageLoaded = true;
+    });
+
+    // 0 ඉඳන් 100ට ගණන් කරන Function එක
+    let loadingInterval = setInterval(function() {
+        if (progress < 90) {
+            // 90% වෙනකම් ටික ටික පිරෙනවා
+            progress += Math.floor(Math.random() * 5) + 1;
+        } else if (pageLoaded && progress < 100) {
+            // Page එක load වෙලා නම් ඉක්මනින් 100% ට යනවා
+            progress += 2;
+        }
+
+        if (progress >= 100) {
+            progress = 100;
+            progressText.innerText = progress + "%";
+            clearInterval(loadingInterval);
+            
+            // 100% වුණාට පස්සේ Loader එක අයින් කරලා Video එක පෙන්වනවා
+            setTimeout(() => {
+                loaderWrapper.style.opacity = "0";
+                setTimeout(() => {
+                    loaderWrapper.style.display = "none";
+                }, 800);
+            }, 500);
+        } else {
+            progressText.innerText = progress + "%";
+        }
+    }, 60);
+
+    // User tap කරාම Video එක play කිරීම
+    clickOverlay.addEventListener("click", function() {
+        clickOverlay.style.display = "none"; // Tap to open කොටස මකා දැමීම
+        introVideo.play();
+    });
+
+    // Video එක ඉවර වුණාම Main Page එකට යාම
+    introVideo.addEventListener("ended", function() {
+        introWrapper.style.opacity = "0"; // Video එක බොඳ වී යාම
+        
+        setTimeout(() => {
+            introWrapper.style.display = "none";
+            document.body.classList.remove("locked"); // Scroll කිරීම නැවත සක්‍රීය කිරීම
+        }, 800);
+    });
+});
+
+
+
+    </script>
+
+</body>
+</html>
